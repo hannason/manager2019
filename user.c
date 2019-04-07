@@ -3,6 +3,9 @@
 int load_file(LOGIN* list[], char* filename){
   int count=0;
   FILE *datafile = fopen(filename, "r");
+  #ifdef DEBUG_MODE
+         printf("DEBUG>> datafile opened! \\n");
+  #endif
   while(!feof(datafile)){
     list[count]=(LOGIN*)malloc(sizeof(LOGIN));
     fscanf(datafile,"%s %s",list[count]->id,list[count]->password);
@@ -76,6 +79,9 @@ void logout(int* is_login){
 
 void save_file(LOGIN* list[], int count, char* filename){
   FILE *datafile = fopen(filename, "w");
+  #ifdef DEBUG_MODE
+         printf("DEBUG>> datafile opened! \\n");
+  #endif
   for(int i=0; i<count; i++){
     fprintf(datafile, "%s %s\n", list[i]->id, list[i]->password);
   }
